@@ -17,6 +17,10 @@ class Tarea(var horasRequeridas: Double){
         }
 
     }
+
+    fun cantidadDeEmpleados() = trabajadoresEnLaTarea.size
+
+    fun tiempoRequeridoParaHacerLaTarea() = horasRequeridas/ this.cantidadDeEmpleados() -1
 }
 
 
