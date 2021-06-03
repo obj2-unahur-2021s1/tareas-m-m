@@ -14,7 +14,7 @@ class Tarea(var horasEstimadas: Double){
             println(it)
         }
         when(yaSeAsignoAUnResponsabe) {
-            true -> println(responsable)
+            true -> println("Responsable de la tarea: " + responsable)
             else -> println("No hay un responsable asignado aún")
         }
     }
