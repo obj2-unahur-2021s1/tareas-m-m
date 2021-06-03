@@ -2,9 +2,9 @@ package ar.edu.unahur.obj2.tareas
 
 class Tarea(var horasEstimadas: Double){
     val trabajadoresEnLaTarea = mutableListOf<Trabajador>()
-    // var responsable : Responsable =
+    var responsable : Responsable ? = null
 
-    var yaSeAsignoAUnResponsabe = false
+    var yaSeAsignoAUnResponsabe = responsable != null
 
     // fun nominaDeEmpleados() = trabajadoresEnLaTarea.size
     // me parece que consultar sería mostrar la lista de empleados y mostrar
@@ -12,6 +12,10 @@ class Tarea(var horasEstimadas: Double){
     fun nominaDeEmpleados() {
         trabajadoresEnLaTarea.forEach {
             println(it)
+        }
+        when(yaSeAsignoAUnResponsabe) {
+            true -> println(responsable)
+            else -> println("No hay un responsable asignado aún")
         }
     }
 
@@ -25,11 +29,11 @@ class Tarea(var horasEstimadas: Double){
         }
 
     }
-/*
+
     fun asignarResponsable(responsableDeTarea: Responsable) {
         responsable = responsableDeTarea
     }
-*/
+
     fun cantidadDeEmpleados() = trabajadoresEnLaTarea.size
 
     fun tiempoRequeridoParaHacerLaTarea() = horasEstimadas/ this.cantidadDeEmpleados() -1
