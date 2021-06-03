@@ -10,6 +10,7 @@ class Tarea(var horasEstimadas: Double){
     // me parece que consultar sería mostrar la lista de empleados y mostrar
     // al responsable.
     fun nominaDeEmpleados() {
+        println("Nómina de empleados:")
         trabajadoresEnLaTarea.forEach {
             println(it)
         }
