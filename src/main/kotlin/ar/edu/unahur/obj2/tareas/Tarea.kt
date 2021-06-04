@@ -20,7 +20,7 @@ class Tarea(var horasEstimadas: Double){
         }
     }
 
-    fun agregarUnTrabajador(trabajadorAAgregar: Trabajador){
+    fun asignarTrabajador(trabajadorAAgregar: Trabajador){
         if(trabajadorAAgregar.sirveParaHacerLaTarea()){
             empleadosAsignados.add(trabajadorAAgregar)
         }
