@@ -19,5 +19,13 @@ class TareaTest : DescribeSpec({
                                                           // lista. El enunciado no especifica cómo
                                                           // es la consulta.
     }
+
+    it("Consultar nómina con un responsable") {
+      tarea1.asignarTrabajador(empleado1)
+      tarea1.asignarResponsable(responsable1)
+      tarea1.nominaDeEmpleados().shouldBe(kotlin.Unit)    // idem - después de saber cómo es la
+                                                          // consulta, se pueden aprovechar estos
+                                                          // dos test distintos.
+    }
   }
 })
