@@ -9,7 +9,7 @@ class Tarea(var horasEstimadas: Double){
     // fun nominaDeEmpleados() = empleadosAsignados.size
     // me parece que consultar sería mostrar la lista de empleados y mostrar
     // al responsable.
-    /*
+
     fun nominaDeEmpleados() {
         println("Nómina de empleados:")
         empleadosAsignados.forEach {
@@ -20,9 +20,10 @@ class Tarea(var horasEstimadas: Double){
             else -> println("No hay un responsable asignado aún")
         }
     }
-     */
 
-    fun nominaDeEmpleados() = empleadosAsignados
+
+    //deberia ser asi
+    //fun nominaDeEmpleados() = empleadosAsignados
     fun asignarTrabajador(trabajadorAAgregar: Trabajador){
         if(trabajadorAAgregar.sirveParaHacerLaTarea()){
             empleadosAsignados.add(trabajadorAAgregar)
