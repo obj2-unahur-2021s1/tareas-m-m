@@ -37,7 +37,7 @@ class Tarea(var horasEstimadas: Double){
 
     fun cantidadDeEmpleados() = trabajadoresEnLaTarea.size
 
-    fun tiempoRequeridoParaHacerLaTarea() = horasEstimadas/ this.cantidadDeEmpleados() -1
+    fun horasNecesarias() = horasEstimadas / this.cantidadDeEmpleados()
 }
 
 
