@@ -13,13 +13,16 @@ class TareaTest : DescribeSpec({
     val responsable1 = Trabajador(600)
     val responsable2 = Trabajador(1000)
 
-    var tarea1 = TareaSimple(24.5, 25099.99, responsable1)
-    var tareaCompuesta = TareaIntegracion(34.0, 30150.99, responsable2)
+    val tarea1 = TareaSimple(24.5, 25099.99, responsable1)
+    val tarea2 = TareaSimple(18.0,20000.00,responsable1)
+
+    var tareaCompuesta = TareaIntegracion(responsable2)
 
     tarea1.asignarEmpleado(empleado1)
     tarea1.asignarEmpleado(empleado2)
 
     tareaCompuesta.agregarTarea(tarea1)
+    tareaCompuesta.agregarTarea(tarea2)
 
     describe("requerimiento 1"){
 
