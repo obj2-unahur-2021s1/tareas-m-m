@@ -26,20 +26,20 @@ abstract class  Tarea ( val  horasEstimadas :  Double , val  costoInfraestructur
 
     fun  cantidadDeEmpleados () = empleadosAsignados.size
 
-    abstract fun  horasNecesarias(): Int
+    abstract fun  horasNecesarias(): Double
 
     abstract fun  costoTarea (): Double
 }
 
 class TareaSimple(  horasEstimadas :  Double , costoInfraestructura :  Double , responsable :  Trabajador): Tarea (horasEstimadas,costoInfraestructura,responsable) {
-    override fun horasNecesarias() = (horasEstimadas / this.cantidadDeEmpleados()).toInt()
+    override fun horasNecesarias() = horasEstimadas / this.cantidadDeEmpleados()
     override fun costoTarea() =  horasNecesarias() * sueldoPromedioPorHora() + horasEstimadas * responsable.cuantoCobraPorHora + costoInfraestructura
 
 }
 
 class TareaCompuesta(  horasEstimadas :  Double ,   costoInfraestructura :  Double ,   responsable :  Trabajador): Tarea(horasEstimadas,costoInfraestructura, responsable){
     val tareasDentro = mutableListOf < Tarea >()
-    override fun horasNecesarias() = tareasDentro.sumBy { it.horasNecesarias() } + this.adicionPorCantidadDeTareas()
+    override fun horasNecesarias() = tareasDentro.sumByDouble { it.horasNecesarias() } + this.adicionPorCantidadDeTareas()
     override fun costoTarea() = this.sumaTotalDeCostos() + (this.sumaTotalDeCostos() * 0.03)
 
     fun cantidadDeSubtareas() = tareasDentro.size

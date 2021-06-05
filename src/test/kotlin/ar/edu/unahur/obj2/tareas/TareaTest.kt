@@ -11,22 +11,41 @@ class TareaTest : DescribeSpec({
     val empleado1 = Trabajador(400)
     val empleado2 = Trabajador(400)
     val responsable1 = Trabajador(600)
+    val responsable2 = Trabajador(1000)
 
     var tarea1 = TareaSimple(24.5, 25099.99, responsable1)
+    var tareaCompuesta = TareaCompuesta(34.0, 30150.99, responsable2)
 
     tarea1.asignarEmpleado(empleado1)
     tarea1.asignarEmpleado(empleado2)
 
-    it("Consultar nómina de una tarea") {
-      tarea1.nominaDeEmpleados().shouldBe(kotlin.Unit)
+    describe("requerimiento 1"){
+
+      describe("tarea simple"){
+        it("Consultar nómina de una tarea") {
+          tarea1.nominaDeEmpleados().shouldBe(kotlin.Unit)
+        }
+
+
+      }
+      describe("tarea compuesta"){}
     }
 
-    it("4.25 horas necesarias para finalizar la tarea") {
-      tarea1.horasNecesarias().shouldBe(12.25)
+    describe("requerimiento 2"){
+      describe("tarea simple"){
+        it("4.25 horas necesarias para finalizar la tarea") {
+          tarea1.horasNecesarias().shouldBe(12.25)
+        }
+      }
+      describe("tarea compuesta"){}
     }
-
-    it("44699.99 es el costo de una tarea") {
-      tarea1.costoTarea().shouldBe(44699.99 plusOrMinus 0.01)
+    describe("requerimiento 3"){
+      describe("tarea simple"){
+        it("44699.99 es el costo de una tarea") {
+          tarea1.costoTarea().shouldBe(44699.99 plusOrMinus 0.01)
+        }
+      }
+      describe("tarea compuesta"){}
     }
 
   }
