@@ -1,4 +1,7 @@
 package ar.edu.unahur.obj2.tareas
+
+import kotlin.math.roundToInt
+
 //creo q deberia ser interface, al tener solo metodos
 abstract class  Tarea (  val  responsable :  Trabajador ) {
 
@@ -50,11 +53,12 @@ class TareaIntegracion( responsable :  Trabajador): Tarea( responsable){
 
     override fun costoTarea() = this.sumaTotalDeCostos() + (this.sumaTotalDeCostos() * 0.03)
 
-    fun cantidadDeSubtareas() = tareasDentro.size
+    // redondeo primero a int para tener una division exacta y despues a double para que trabaje con double
+    fun adicionPorCantidadDeTareas() = ((this.sumaTotalHoras() / 8).roundToInt()).toDouble()
 
-    fun adicionPorCantidadDeTareas() = this.cantidadDeSubtareas()/8
+    fun sumaTotalHoras() = tareasDentro.sumByDouble { it.horasNecesarias() }
 
-    fun sumaTotalDeCostos() = tareasDentro.sumByDouble { it.costoTarea() }
+    fun sumaTotalDeCostos() = tareasDentro.sumByDouble{ it.costoTarea()}
 
     fun agregarTarea(tareaAAgregar: Tarea) = tareasDentro.add(tareaAAgregar)
 }

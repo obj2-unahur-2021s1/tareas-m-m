@@ -31,7 +31,6 @@ class TareaTest : DescribeSpec({
           tarea1.nominaDeEmpleados().shouldBe(kotlin.Unit)
         }
 
-
       }
       describe("tarea compuesta"){}
     }
@@ -42,7 +41,11 @@ class TareaTest : DescribeSpec({
           tarea1.horasNecesarias().shouldBe(12.25)
         }
       }
-      describe("tarea compuesta"){}
+      describe("tarea compuesta"){
+        it(""){
+
+        }
+      }
     }
     describe("requerimiento 3"){
       describe("tarea simple"){
