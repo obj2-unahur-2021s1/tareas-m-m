@@ -9,7 +9,7 @@ abstract class  Tarea ( val  horasEstimadas :  Double , val  costoInfraestructur
         empleadosAsignados.forEach {sumatoria += it.cuantoCobraPorHora}
         return (sumatoria / cantidadDeEmpleados ())
     }
-
+    //problema aca
     fun  nominaDeEmpleados () {
         println ( " Nómina de empleados: " )
         empleadosAsignados.forEach {
@@ -26,14 +26,29 @@ abstract class  Tarea ( val  horasEstimadas :  Double , val  costoInfraestructur
 
     fun  cantidadDeEmpleados () = empleadosAsignados.size
 
-    fun  horasNecesarias () = horasEstimadas /  this .cantidadDeEmpleados ()
+    abstract fun  horasNecesarias(): Int
 
-    fun  costoTarea () = horasNecesarias () * sueldoPromedioPorHora () + horasEstimadas * responsable.cuantoCobraPorHora + costoInfraestructura
+    abstract fun  costoTarea (): Double
 }
 
-class TareaSimple(  horasEstimadas :  Double , costoInfraestructura :  Double , responsable :  Trabajador): Tarea (horasEstimadas,costoInfraestructura,responsable){}
+class TareaSimple(  horasEstimadas :  Double , costoInfraestructura :  Double , responsable :  Trabajador): Tarea (horasEstimadas,costoInfraestructura,responsable) {
+    override fun horasNecesarias() = (horasEstimadas / this.cantidadDeEmpleados()).toInt()
+    override fun costoTarea() =  horasNecesarias() * sueldoPromedioPorHora() + horasEstimadas * responsable.cuantoCobraPorHora + costoInfraestructura
+
+}
+
 class TareaCompuesta(  horasEstimadas :  Double ,   costoInfraestructura :  Double ,   responsable :  Trabajador): Tarea(horasEstimadas,costoInfraestructura, responsable){
     val tareasDentro = mutableListOf < Tarea >()
-}
+    override fun horasNecesarias() = tareasDentro.sumBy { it.horasNecesarias() } + this.adicionPorCantidadDeTareas()
+    override fun costoTarea() = this.sumaTotalDeCostos() + (this.sumaTotalDeCostos() * 0.03)
 
-class  Trabajador ( var  cuantoCobraPorHora :  Int )
+    fun cantidadDeSubtareas() = tareasDentro.size
+
+    fun adicionPorCantidadDeTareas() = (this.cantidadDeSubtareas()/8).toInt()
+
+    fun sumaTotalDeCostos() = tareasDentro.sumByDouble { it.costoTarea() }
+
+    fun agregarTarea(tareaAAgregar: Tarea) = tareasDentro.add(tareaAAgregar)
+}
+// solucionar lo del q esta a acargo
+class  Trabajador ( var  cuantoCobraPorHora :  Int ){}
