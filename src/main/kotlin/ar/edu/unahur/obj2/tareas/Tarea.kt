@@ -19,10 +19,6 @@ abstract class  Tarea ( val  horasEstimadas :  Double , val  costoInfraestructur
         }
         println ( " Responsable: "  + responsable)
     }
-    //problema por si alguien quiere agregar un responsable
-    fun  asignarEmpleado ( nuevoEmpleado :  Trabajador ) {
-        empleadosAsignados.add (nuevoEmpleado)
-    }
 
     fun  cantidadDeEmpleados () = empleadosAsignados.size
 
@@ -35,9 +31,13 @@ class TareaSimple(  horasEstimadas :  Double , costoInfraestructura :  Double , 
     override fun horasNecesarias() = horasEstimadas / this.cantidadDeEmpleados()
     override fun costoTarea() =  horasNecesarias() * sueldoPromedioPorHora() + horasEstimadas * responsable.cuantoCobraPorHora + costoInfraestructura
 
+    //problema por si alguien quiere agregar un responsable
+    fun  asignarEmpleado ( nuevoEmpleado :  Trabajador ) {
+        empleadosAsignados.add (nuevoEmpleado)
+    }
 }
 
-class TareaCompuesta(  horasEstimadas :  Double ,   costoInfraestructura :  Double ,   responsable :  Trabajador): Tarea(horasEstimadas,costoInfraestructura, responsable){
+class TareaIntegracion(  horasEstimadas :  Double ,   costoInfraestructura :  Double ,   responsable :  Trabajador): Tarea(horasEstimadas,costoInfraestructura, responsable){
     val tareasDentro = mutableListOf < Tarea >()
     override fun horasNecesarias() = tareasDentro.sumByDouble { it.horasNecesarias() } + this.adicionPorCantidadDeTareas()
     override fun costoTarea() = this.sumaTotalDeCostos() + (this.sumaTotalDeCostos() * 0.03)
