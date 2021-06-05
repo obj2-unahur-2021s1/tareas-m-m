@@ -18,10 +18,7 @@ class TareaTest : DescribeSpec({
     tarea1.asignarEmpleado(empleado2)
 
     it("Consultar nómina de una tarea") {
-      tarea1.nominaDeEmpleados().shouldBe(kotlin.Unit)    // revisar esto, porque es una salida de
-                                                          // tipo String y no permite corroborar la
-                                                          // lista. El enunciado no especifica cómo
-                                                          // es la consulta.
+      tarea1.nominaDeEmpleados().shouldBe(kotlin.Unit)
     }
 
     it("4.25 horas necesarias para finalizar la tarea") {
