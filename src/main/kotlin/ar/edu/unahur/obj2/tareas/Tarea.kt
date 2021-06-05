@@ -1,58 +1,39 @@
 package ar.edu.unahur.obj2.tareas
 
-class Tarea(var horasEstimadas: Double){
-    val empleadosAsignados = mutableListOf<Trabajador>()
-    var responsable : Responsable ? = null
+abstract class  Tarea ( val  horasEstimadas :  Double , val  costoInfraestructura :  Double , val  responsable :  Trabajador ) {
 
-    var yaSeAsignoAUnResponsabe = responsable != null
+    val empleadosAsignados = mutableListOf < Trabajador > ()     // ver si se puede pasar por parámetro
 
-    // fun nominaDeEmpleados() = empleadosAsignados.size
-    // me parece que consultar sería mostrar la lista de empleados y mostrar
-    // al responsable.
+    fun  sueldoPromedioPorHora (): Double {
+        var sumatoria :  Double  =  0.0
+        empleadosAsignados.forEach {sumatoria += it.cuantoCobraPorHora}
+        return (sumatoria / cantidadDeEmpleados ())
+    }
 
-    fun nominaDeEmpleados() {
-        println("Nómina de empleados:")
+    fun  nominaDeEmpleados () {
+        println ( " Nómina de empleados: " )
         empleadosAsignados.forEach {
-            println(it)
+            //no entiendo lo de es, lo puse entre comillas porq si lo dejo solo marca error
+            println (it)
+            //println (es)
         }
-        when(yaSeAsignoAUnResponsabe) {
-            true -> println("Responsable de la tarea: " + responsable)
-            else -> println("No hay un responsable asignado aún")
-        }
+        println ( " Responsable: "  + responsable)
+    }
+    //problema por si alguien quiere agregar un responsable
+    fun  asignarEmpleado ( nuevoEmpleado :  Trabajador ) {
+        empleadosAsignados.add (nuevoEmpleado)
     }
 
+    fun  cantidadDeEmpleados () = empleadosAsignados.size
 
-    //deberia ser asi
-    //fun nominaDeEmpleados() = empleadosAsignados
-    fun asignarTrabajador(trabajadorAAgregar: Trabajador){
-        if(trabajadorAAgregar.sirveParaHacerLaTarea()){
-            empleadosAsignados.add(trabajadorAAgregar)
-        }
-        else if(!trabajadorAAgregar.sirveParaHacerLaTarea() and !yaSeAsignoAUnResponsabe){
-            empleadosAsignados.add(trabajadorAAgregar)
-            yaSeAsignoAUnResponsabe = true
-        }
+    fun  horasNecesarias () = horasEstimadas /  this .cantidadDeEmpleados ()
 
-    }
-
-    fun asignarResponsable(responsableDeTarea: Responsable) {
-        responsable = responsableDeTarea
-    }
-
-    fun cantidadDeEmpleados() = empleadosAsignados.size
-    //el -1 porq el supervisor no hace nada
-    fun horasNecesarias() = horasEstimadas / this.cantidadDeEmpleados() - 1
+    fun  costoTarea () = horasNecesarias () * sueldoPromedioPorHora () + horasEstimadas * responsable.cuantoCobraPorHora + costoInfraestructura
 }
 
+class TareaSimple(  horasEstimadas :  Double , costoInfraestructura :  Double , responsable :  Trabajador): Tarea (horasEstimadas,costoInfraestructura,responsable){}
+class TareaCompuesta(  horasEstimadas :  Double ,   costoInfraestructura :  Double ,   responsable :  Trabajador): Tarea(horasEstimadas,costoInfraestructura, responsable){
+    val tareasDentro = mutableListOf < Tarea >()
+}
 
-
-//pensando seriamente en que deberia ser inteface
-abstract class Trabajador(var cuantoCobraPorHora: Int){
-    abstract fun sirveParaHacerLaTarea(): Boolean
-}
-class Empleado(cuantoCobraPorHora: Int): Trabajador(cuantoCobraPorHora) {
-    override fun sirveParaHacerLaTarea() = true
-}
-class Responsable(cuantoCobraPorHora: Int): Trabajador(cuantoCobraPorHora){
-    override fun sirveParaHacerLaTarea() = false
-}
+class  Trabajador ( var  cuantoCobraPorHora :  Int )
