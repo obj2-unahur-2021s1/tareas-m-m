@@ -2,19 +2,20 @@ package ar.edu.unahur.obj2.tareas
 
 import io.kotest.assertions.throwables.shouldThrowAny
 import io.kotest.core.spec.style.DescribeSpec
+import io.kotest.matchers.doubles.plusOrMinus
 import io.kotest.matchers.shouldBe
 
 class TareaTest : DescribeSpec({
   describe("Tarea") {
 
-    val empleado1 = Empleado(400)
-    val empleado2 = Empleado(400)
-    val responsable1 = Responsable(600)
+    val empleado1 = Trabajador(400)
+    val empleado2 = Trabajador(400)
+    val responsable1 = Trabajador(600)
 
-    var tarea1 = Tarea(responsable1,8.5, 25999.99)
+    var tarea1 = Tarea(24.5, 25099.99, responsable1)
 
-    //tarea1.asignarTrabajador(empleado1)
-    //tarea1.asignarTrabajador(empleado2)
+    tarea1.asignarEmpleado(empleado1)
+    tarea1.asignarEmpleado(empleado2)
 
     it("Consultar nómina de una tarea") {
       tarea1.nominaDeEmpleados().shouldBe(kotlin.Unit)    // revisar esto, porque es una salida de
@@ -23,17 +24,13 @@ class TareaTest : DescribeSpec({
                                                           // es la consulta.
     }
 
-    /*
-    it("Consultar nómina con un responsable") {
-      tarea1.asignarResponsable(responsable1)
-      tarea1.nominaDeEmpleados().shouldBe(kotlin.Unit)    // idem - después de saber cómo es la
-                                                          // consulta, se pueden aprovechar estos
-                                                          // dos test distintos.
-    }
-    */
-
     it("4.25 horas necesarias para finalizar la tarea") {
-      tarea1.horasNecesarias().shouldBe(4.25)
+      tarea1.horasNecesarias().shouldBe(12.25)
     }
+
+    it("44699.99 es el costo de una tarea") {
+      tarea1.costoTarea().shouldBe(44699.99 plusOrMinus 0.01)
+    }
+
   }
 })
