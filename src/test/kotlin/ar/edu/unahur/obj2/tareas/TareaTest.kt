@@ -4,6 +4,7 @@ import io.kotest.assertions.throwables.shouldThrowAny
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.doubles.plusOrMinus
 import io.kotest.matchers.shouldBe
+import io.kotest.matchers.doubles.plusOrMinus
 
 class TareaTest : DescribeSpec({
   describe("Tarea") {
@@ -11,23 +12,49 @@ class TareaTest : DescribeSpec({
     val empleado1 = Trabajador(400)
     val empleado2 = Trabajador(400)
     val responsable1 = Trabajador(600)
+    val responsable2 = Trabajador(1000)
 
-    var tarea1 = Tarea(24.5, 25099.99, responsable1)
+    val tarea1 = TareaSimple(24.5, 25099.99, responsable1)
+    val tarea2 = TareaSimple(18.0,20000.00,responsable1)
+
+    var tareaCompuesta = TareaIntegracion(responsable2)
 
     tarea1.asignarEmpleado(empleado1)
     tarea1.asignarEmpleado(empleado2)
 
-    it("Consultar nómina de una tarea") {
-      tarea1.nominaDeEmpleados().shouldBe(kotlin.Unit)
+    tareaCompuesta.agregarTarea(tarea1)
+    tareaCompuesta.agregarTarea(tarea2)
+
+    describe("requerimiento 1"){
+
+      describe("tarea simple"){
+        it("Consultar nómina de una tarea") {
+          tarea1.nominaDeEmpleados().shouldBe(kotlin.Unit)
+        }
+
+      }
+      describe("tarea compuesta"){}
     }
 
-    it("4.25 horas necesarias para finalizar la tarea") {
-      tarea1.horasNecesarias().shouldBe(12.25)
-    }
+    describe("requerimiento 2"){
+      describe("tarea simple"){
+        it("4.25 horas necesarias para finalizar la tarea") {
+          tarea1.horasNecesarias().shouldBe(12.25)
+        }
+      }
+      describe("tarea compuesta"){
+        it("acá va un nombre"){
 
-    it("44699.99 es el costo de una tarea") {
-      tarea1.costoTarea().shouldBe(44699.99 plusOrMinus 0.01)
+        }
+      }
     }
-
+    describe("requerimiento 3"){
+      describe("tarea simple"){
+        it("44699.99 es el costo de una tarea") {
+          tarea1.costoTarea().shouldBe(44699.99 plusOrMinus 0.01)
+        }
+      }
+    }
   }
 })
+
