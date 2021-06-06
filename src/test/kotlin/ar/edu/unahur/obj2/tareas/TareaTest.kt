@@ -9,10 +9,10 @@ import io.kotest.matchers.doubles.plusOrMinus
 class TareaTest : DescribeSpec({
   describe("Tarea") {
 
-    val empleado1 = Trabajador(400)
-    val empleado2 = Trabajador(400)
-    val responsable1 = Trabajador(600)
-    val responsable2 = Trabajador(1000)
+    val empleado1 = Trabajador(400.00)
+    val empleado2 = Trabajador(400.00)
+    val responsable1 = Trabajador(600.00)
+    val responsable2 = Trabajador(1000.00)
 
     val tarea1 = TareaSimple(24.5, 25099.99, responsable1)
     val tarea2 = TareaSimple(18.0,20000.00,responsable1)

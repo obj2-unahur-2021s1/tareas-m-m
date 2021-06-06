@@ -57,6 +57,6 @@ class TareaIntegracion( responsable :  Trabajador): Tarea( responsable){
     fun agregarTarea(tareaAAgregar: Tarea) = tareasDentro.add(tareaAAgregar)
 }
 
-class  Trabajador (var cuantoCobraPorHora :  Int)
+class  Trabajador (var cuantoCobraPorHora :  Double)
 
 
