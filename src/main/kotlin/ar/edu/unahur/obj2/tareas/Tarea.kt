@@ -37,24 +37,27 @@ class TareaSimple( val horasEstimadas :  Double, val costoInfraestructura :  Dou
     }
 }
 
-class TareaIntegracion( responsable :  Trabajador): Tarea( responsable){
+class TareaIntegracion(responsable :  Trabajador): Tarea(responsable) {
 
-    val tareasDentro = mutableListOf < Tarea>()
+    val subTareas = mutableListOf < Tarea>()
 
-    override fun nominaDeEmpleados() = tareasDentro.forEach { it.nominaDeEmpleados() }
+    override fun nominaDeEmpleados() {
+        subTareas.forEach { it.nominaDeEmpleados() }
+        println(" Responsable de la integración: " + responsable)
+    }
 
-    override fun horasNecesarias() = tareasDentro.sumByDouble { it.horasNecesarias() } + this.adicionPorCantidadDeTareas()
+    override fun horasNecesarias() = subTareas.sumByDouble { it.horasNecesarias() } + this.adicionPorCantidadDeTareas()
 
     override fun costoTarea() = this.sumaTotalDeCostos() + (this.sumaTotalDeCostos() * 0.03)
 
     // redondeo primero a int para tener una division exacta y despues a double para que trabaje con double
     fun adicionPorCantidadDeTareas() = ((this.sumaTotalHoras() / 8).roundToInt()).toDouble()
 
-    fun sumaTotalHoras() = tareasDentro.sumByDouble { it.horasNecesarias() }
+    fun sumaTotalHoras() = subTareas.sumByDouble { it.horasNecesarias() }
 
-    fun sumaTotalDeCostos() = tareasDentro.sumByDouble{ it.costoTarea()}
+    fun sumaTotalDeCostos() = subTareas.sumByDouble{ it.costoTarea()}
 
-    fun agregarTarea(tareaAAgregar: Tarea) = tareasDentro.add(tareaAAgregar)
+    fun agregarTarea(tareaAAgregar: Tarea) = subTareas.add(tareaAAgregar)
 }
 
 class  Trabajador (var cuantoCobraPorHora :  Double)

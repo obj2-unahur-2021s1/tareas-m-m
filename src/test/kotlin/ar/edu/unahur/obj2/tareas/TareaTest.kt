@@ -25,15 +25,19 @@ class TareaTest : DescribeSpec({
     tareaCompuesta.agregarTarea(tarea1)
     tareaCompuesta.agregarTarea(tarea2)
 
-    describe("requerimiento 1"){
+    describe("requerimiento 1") {
 
-      describe("tarea simple"){
+      describe("tarea simple") {
         it("Consultar nómina de una tarea") {
           tarea1.nominaDeEmpleados().shouldBe(kotlin.Unit)
         }
 
       }
-      describe("tarea compuesta"){}
+      describe("tarea compuesta") {
+        it("Consultar nómina de tarea compuesta") {
+          tareaCompuesta.nominaDeEmpleados().shouldBe(kotlin.Unit)
+        }
+      }
     }
 
     describe("requerimiento 2"){
