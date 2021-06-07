@@ -57,10 +57,15 @@ class TareaTest : DescribeSpec({
         }
       }
     }
-    describe("requerimiento 3"){
+    describe("Costos de tareas"){
       describe("tarea simple"){
         it("44699.99 es el costo de una tarea") {
           tarea1.costoTarea().shouldBe(44699.99 plusOrMinus 0.01)
+        }
+      }
+      describe("Tarea compuesta") {
+        it("el costo de la tarea compuesta es 87034.98") {
+          tareaCompuesta.costoTarea().shouldBe(87034.98 plusOrMinus 0.01)
         }
       }
     }
