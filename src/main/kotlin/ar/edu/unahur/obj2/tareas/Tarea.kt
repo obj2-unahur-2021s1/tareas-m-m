@@ -58,7 +58,7 @@ class TareaIntegracion(responsable :  Trabajador): Tarea(responsable) {
 
     fun sumaTotalDeCostos() = subTareas.sumByDouble{ it.costoTarea()}
 
-    fun agregarTarea(tareaAAgregar: Tarea) = subTareas.add(tareaAAgregar)
+    fun agregarTarea(nuevaTarea: Tarea) = subTareas.add(nuevaTarea)
 }
 
 class  Trabajador (var cuantoCobraPorHora :  Double)
