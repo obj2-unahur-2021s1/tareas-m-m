@@ -11,6 +11,7 @@ class TareaTest : DescribeSpec({
 
     val empleado1 = Trabajador(400.00)
     val empleado2 = Trabajador(400.00)
+    val empleado3 = Trabajador(500.00)
     val responsable1 = Trabajador(600.00)
     val responsable2 = Trabajador(1000.00)
 
@@ -22,16 +23,17 @@ class TareaTest : DescribeSpec({
     tarea1.asignarEmpleado(empleado1)
     tarea1.asignarEmpleado(empleado2)
 
+    tarea2.asignarEmpleado(empleado3)
+
     tareaCompuesta.agregarTarea(tarea1)
     tareaCompuesta.agregarTarea(tarea2)
 
-    describe("requerimiento 1") {
+    describe("Nóminas de empleados") {
 
       describe("tarea simple") {
         it("Consultar nómina de una tarea") {
           tarea1.nominaDeEmpleados().shouldBe(kotlin.Unit)
         }
-
       }
       describe("tarea compuesta") {
         it("Consultar nómina de tarea compuesta") {
@@ -40,15 +42,18 @@ class TareaTest : DescribeSpec({
       }
     }
 
-    describe("requerimiento 2"){
-      describe("tarea simple"){
-        it("4.25 horas necesarias para finalizar la tarea") {
+    describe("Horas necesarias para finalizar tarea"){
+      describe("Tareas simples"){
+        it("4.25 hs para una primera tarea") {
           tarea1.horasNecesarias().shouldBe(12.25)
         }
+        it("18 hs. para la finalizar la segunda tarea") {
+          tarea2.horasNecesarias().shouldBe(18.0)
+        }
       }
-      describe("tarea compuesta"){
-        it("acá va un nombre"){
-
+      describe("Tarea compuesta"){
+        it("34.25 hs. para una tarea compuesta "){
+          tareaCompuesta.horasNecesarias().shouldBe(34.25)
         }
       }
     }

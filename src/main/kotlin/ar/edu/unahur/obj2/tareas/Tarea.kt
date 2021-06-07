@@ -46,12 +46,12 @@ class TareaIntegracion(responsable :  Trabajador): Tarea(responsable) {
         println(" Responsable de la integración: " + responsable)
     }
 
-    override fun horasNecesarias() = subTareas.sumByDouble { it.horasNecesarias() } + this.adicionPorCantidadDeTareas()
+    override fun horasNecesarias() = subTareas.sumByDouble { it.horasNecesarias() } + this.adicionalPorCantidadDeTareas()
 
     override fun costoTarea() = this.sumaTotalDeCostos() + (this.sumaTotalDeCostos() * 0.03)
 
     // redondeo primero a int para tener una division exacta y despues a double para que trabaje con double
-    fun adicionPorCantidadDeTareas() = ((this.sumaTotalHoras() / 8).roundToInt()).toDouble()
+    fun adicionalPorCantidadDeTareas() = ((this.sumaTotalHoras() / 8).roundToInt()).toDouble()
 
     fun sumaTotalHoras() = subTareas.sumByDouble { it.horasNecesarias() }
 
